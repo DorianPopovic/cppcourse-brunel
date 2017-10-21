@@ -2,35 +2,51 @@
 
 class Neuron{
 	
+	//-------------------PUBLIC ARGUMENTS AND METHODS PROTOTYPES--------------//
+	
 	public:
 	Neuron ();
 	
-	/* giving access to the membrane potential, the number of 
-	spikes and time when spikes occured of the neuron*/
-	double getV() const;
-	int getSpikes() const;
-	double getTime(int) const;
+	//-------------GETTERS--------//
+	double getV_() const;
+	double getI_ext_() const;
+	unsigned long getNum_Spikes_() const;
+	unsigned long getLast_Spike_time_() const;
+	unsigned long getClock_() const;
 	
-	/*enables to set different values for
-	the parameters of the neuron*/
-	void setV(double);
-	void setSpikes(int);
-	void setTime(double);
+	//-------------SETTERS-------//
+	void setV_(double);
+	void setI_ext_(double);
+	void setLast_Spike_time_(unsigned long);
 	
  
     //method that updates the neuron in time
 	void update(double, double, double, double, double, double, double);
 	
-	private:
-	double V; //membrane potential
-	int Spikes;//number of spikes that occured
-	std::vector<double> Time;//times when the spikes occured
 	
-	//constants for each neuron
-	double C;
-	double R;
-	double Tau;
+	//--------------------------------PRIVATE ARGUMENTS---------------------------------//
+	
+	private:
+	
+	double V_;       // -> Membrane potential
+	double I_ext_;   // -> External specified current
+	
+	unsigned long Num_Spikes_;        // -> Number of spikes that occured during the simulation
+	unsigned long Last_Spike_time_;   // -> Time when the last spike occured
+	unsigned long Clock_;             // -> Local clock for each neuron
+	
+	//------Constants for the differential equation------
+	double C1_;
+	double C2_;
+	
+	
+	const double R_ =20.0;              // -> Membrane resistance
+	const double Tau_ =20.0;             // -> Membrane constant time
+	const double Vth_ =20.0;            // -> Threshold at wih spike occurs
+	const double RefTime_ =2.0;         // -> Refractory period duration
+	const double h_ =0.1;               // -> Simulation time step
+	const unsigned long RefSteps_;      // -> How many time steps for the refractory period
 	
 };
 
-/* c = 250 pF, tau = 10ms, tau(af) = 2ms, Vreset = -70, h = 0.1*/
+
