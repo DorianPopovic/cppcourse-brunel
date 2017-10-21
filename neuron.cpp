@@ -8,7 +8,7 @@ using namespace std;
 
 Neuron:: Neuron()
     :
-    RefSteps_ (static_cast<const unsigned long>( Reftime_ / h_)),
+    RefSteps_ (static_cast<const unsigned long>( RefTime_ / h_)),
     V_(0.0),
     I_ext_(0.0),
     Num_Spikes_(0),
@@ -27,7 +27,7 @@ double Neuron::getV_() const
 	return V_;
 }
 
-double Neuron::getI_ext_()
+double Neuron::getI_ext_() const
 {
 	return I_ext_;
 }
@@ -51,7 +51,7 @@ unsigned long Neuron::getClock_() const
 
 //------------METHODS SETTING THE VALUES FOR THE ATTRIBUTES------------//
 /** 
- * setV_                ---> Sets the membrane potential to @param v.
+ *  setV_               ---> Sets the membrane potential to @param v.
  *  setI_ext_           ---> Sets the external current to @param i.
  *  setLast_Spike_time_ ---> Sets the time of the last occurin spike to @param T.  
  */
@@ -66,7 +66,7 @@ void Neuron::setI_ext_(double i)
 	I_ext_ = i;
 }
 
-void setLast_Spike_time_(unsigned long T)
+void Neuron::setLast_Spike_time_(unsigned long T)
 {
 	Last_Spike_time_ = T;
 }
@@ -102,7 +102,7 @@ bool Neuron::update(unsigned long simsteps)
 			Last_Spike_time_ = Clock_;
 			
 		}
-		if ( (Last_Spike_time_ > 0 ) and ((Clock_ - Last_Spike_time_) < RefSteps_) 
+		if ((Last_Spike_time_ > 0 ) and ((Clock_ - Last_Spike_time_) < RefSteps_)) 
 		{
 			/** 
 			 * REFRACTORY PERIOD :

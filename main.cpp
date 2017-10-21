@@ -18,10 +18,10 @@ int main()
 	 *  current_start --> when does the current input start ?
 	 *  current_end   --> when does the current input stop ?
 	 */
-	int endtime;
-	int current_start;
-	int current_end;
-	double I_ext;
+	int endtime = 5000;
+	int current_start = 1000;
+	int current_end = 4000;
+	double I_ext = 1.01;
 	Neuron single_neuron;
 	
 	
@@ -54,7 +54,7 @@ int main()
 		
 		if (Spike)
 		{
-			cout << " SPIKE AT t= " << simtime << "ms" << endl;
+			cout << " SPIKE AT t= " << simtime*0.1 << "ms" << endl;
 		}
 	}
 	
