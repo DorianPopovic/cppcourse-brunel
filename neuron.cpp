@@ -4,6 +4,9 @@
 #include <fstream>
 using namespace std;
 
+
+//------------------CONSTRUCTOR----------------//
+
 Neuron:: Neuron()
     :
     RefSteps_ (static_cast<const unsigned long>( Reftime_ / h_)),
@@ -48,6 +51,11 @@ unsigned long Neuron::getClock_() const
 
 
 //------------METHODS SETTING THE VALUES FOR THE ATTRIBUTES------------//
+/** 
+ * setV_               ---> Sets the membrane potential to @param v.
+ *  setI_ext_           ---> Sets the external current to @param i.
+ *  setLast_Spike_time_ ---> Sets the time of the last occurin spike to @param T.  
+ */
 
 void Neuron::setV_(double v)
 {
@@ -66,49 +74,54 @@ void setLast_Spike_time_(unsigned long T)
 
 
 
-
-//final upadte method
-void Neuron::update(double h, double simtime, double endtime, double a, double b, double Iext, double Vth)
+//-----------------------UPDATE METHOD----------------------//
+/** 
+ * Updates our neuron in time for how many simulation steps we want.
+ * @param simsteps    --> for how many simulation steps do we want to update our neuron
+ * @return bool spike --> returns TRUE if there was a spike during "simsteps" steps
+ *                    --> returns FALSE if there were no spikes during the steps. 
+ */
+bool Neuron::update(unsigned long simsteps)
 {
-	double I;
-	ofstream MembPotFile;  		//Instantiate output file
-    MembPotFile.open ("./MembPotFile");	//Open with a given name
-    MembPotFile << "Starting Simulation.\n";
+	if (simsteps == 0) return false;
 	
-	while (simtime < endtime)
+	bool spike = false;
+	const auto stoptime_ = Clock_ + simsteps;
+	
+	
+	while (Clock_ < stoptime_)
 	{
-		if ( (a <= simtime) and (simtime < b)) // sets incoming current during the decide time interval
+		if ( Vth_ < V_ ) 
 		{
-			I = Iext;
+			/**
+			 * Spike occurs :
+			 * --> increment the number of spikes.
+			 * --> time of the last spike is the internal clock time.
+			 */
+			spike = true;
+			++Num_Spikes_;
+			Last_Spike_time_ = Clock_;
+			
+		}
+		if ( (Last_Spike_time_ > 0 ) and ((Clock_ - Last_Spike_time_) < RefSteps_) 
+		{
+			/** 
+			 * REFRACTORY PERIOD :
+			 * --> set the membrane potential to 0 or 10.
+			 */
+			 V_ = 0.0;
 		}
 		else
 		{
-			I = 0.0;
+			/**
+			 * No spike and not refractory :
+			 * --> Solve the membrane potential differential equation using the constants (see constructor).
+			 * --> I_ext_ will be checked and set in the main loop.
+			 */
+			 V_ = C1_*V_ + I_ext_*C2_;
 		}
 		
-	    if ((!Time.empty()) and ((Time.back() <= simtime) and (simtime <= (Time.back() + 1)))) // refractory period is 1ms
-		{
-			MembPotFile << " REFRACTORY PERIOD V = " << V << endl;
-		}
-		else if ( Vth < V )
-		{
-			Time.push_back(simtime);
-			++Spikes;
-			cout << " SPIKE AT " << simtime << " ms" << endl;
-			V = 10.0;
-		}
-		
-		else 
-		{
-			double newV = exp(-h/Tau)*V + I*R*(1 - exp(-h/Tau));
-		    V = newV;
-			
-		}
-		
-		simtime += h;
-		MembPotFile << " At time : " << simtime << "ms, V = " << V << endl;
-		
+	    ++Clock_;
 	}
-	
-	MembPotFile.close();
+	return spike;
 }

@@ -20,8 +20,8 @@ class Neuron{
 	void setLast_Spike_time_(unsigned long);
 	
  
-    //method that updates the neuron in time
-	void update(double, double, double, double, double, double, double);
+    //-----------------UPDATE FUNCTIONS PROTOTYPE------------//
+	bool update(unsigned long);
 	
 	
 	//--------------------------------PRIVATE ARGUMENTS---------------------------------//
