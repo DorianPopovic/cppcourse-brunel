@@ -59,7 +59,7 @@ void Neuron::update(double h, double simtime, double endtime, double a, double b
 	
 	while (simtime < endtime)
 	{
-		if ( a <= simtime < b) // sets the current depending on the time interval we are in and the on chosen by the user
+		if ( (a <= simtime) and (simtime < b)) // sets incoming current during the decide time interval
 		{
 			I = Iext;
 		}
@@ -68,22 +68,26 @@ void Neuron::update(double h, double simtime, double endtime, double a, double b
 			I = 0.0;
 		}
 		
-	    if ((!Time.empty()) and (Time.back() <= simtime <= (Time.back() + 1)))// refractory period is 1ms
+	    if ((!Time.empty()) and ((Time.back() <= simtime) and (simtime <= (Time.back() + 1)))) // refractory period is 1ms
 		{
-			V = 0.0;
-			MembPotFile << " Refractory period V = " << V << endl;
+			MembPotFile << " REFRACTORY PERIOD V = " << V << endl;
 		}
 		else if ( Vth < V )
 		{
 			Time.push_back(simtime);
 			++Spikes;
+			cout << " SPIKE AT " << simtime << " ms" << endl;
+			V = 10.0;
 		}
 		
-		double newV = exp(-h/Tau)*V + I*R*(1 - exp(-h/Tau));
-		V = newV;
+		else 
+		{
+			double newV = exp(-h/Tau)*V + I*R*(1 - exp(-h/Tau));
+		    V = newV;
+			
+		}
 		
 		simtime += h;
-		
 		MembPotFile << " At time : " << simtime << "ms, V = " << V << endl;
 		
 	}
