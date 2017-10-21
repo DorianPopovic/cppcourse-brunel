@@ -1,19 +1,66 @@
 #include "neuron.h"
 #include <iostream>
+#include <fstream>
+
+using namespace std;
 
 
-int main(){
+/** 
+ * MAIN SINGLE-NEURON SIMULATION LOOP
+ * --> Updates a given neuron during each step time and beginning at t = 0.
+ * --> Writes the value of the membrane potential in a file after each step time.
+ */
+
+int main()
+{
+	/** CHANGE THE SIMULATION TIMES HERE (in integers = *10 the time you want in ms)
+	 *  endtime       --> when does the simulation end ?
+	 *  current_start --> when does the current input start ?
+	 *  current_end   --> when does the current input stop ?
+	 */
+	int endtime;
+	int current_start;
+	int current_end;
+	double I_ext;
+	Neuron single_neuron;
 	
-	Neuron neuron;
-	double I;
 	
-	//getting the different constants for the simulation
-	std::cout << "Enter the current in mV :\n";
-    std::cin >> I;
-    
-    
-    //run the simulation for the neuron
-	neuron.update(h, simtime, endtime, a, b, Iext, Vth);
+	ofstream MembPotFile;  		
+    MembPotFile.open ("./MembPotFile");
+    MembPotFile << "Starting Simulation.\n";
+	
+	
+	for( int simtime=0; simtime < endtime; ++simtime )
+	{
+		if( (current_start <= simtime) and (simtime < current_end) )
+		{
+			/** Current input time interval
+			 *  --> set I_ext_ to the entered value up here.
+			 *  --> else no current input.
+			 */
+			 single_neuron.setI_ext_(I_ext);
+		}
+		else
+		{
+			single_neuron.setI_ext_(0.0);
+		}
+		
+		/** 
+		 * Updating the neuron for a single time-step :
+		 * --> store the membrane potential in a file.
+		 * --> if the neuron spikes during this single time-step, write it in the terminal. */
+		bool Spike = single_neuron.update(1);
+		MembPotFile << "At time t= " << simtime*0.1 << "ms    V= " << single_neuron.getV_() << endl;
+		
+		if (Spike)
+		{
+			cout << " SPIKE AT t= " << simtime << "ms" << endl;
+		}
+	}
+	
+	cout << " Number of spikes during the single-neuron simulation: " << single_neuron.getNum_Spikes_() << endl;
+	
+	
 	
 	return 0;
 }

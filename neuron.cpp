@@ -1,7 +1,6 @@
 #include "neuron.h"
 #include <cmath>
-#include <iostream>
-#include <fstream>
+
 using namespace std;
 
 
@@ -52,7 +51,7 @@ unsigned long Neuron::getClock_() const
 
 //------------METHODS SETTING THE VALUES FOR THE ATTRIBUTES------------//
 /** 
- * setV_               ---> Sets the membrane potential to @param v.
+ * setV_                ---> Sets the membrane potential to @param v.
  *  setI_ext_           ---> Sets the external current to @param i.
  *  setLast_Spike_time_ ---> Sets the time of the last occurin spike to @param T.  
  */
