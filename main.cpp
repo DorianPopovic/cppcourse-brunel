@@ -60,8 +60,6 @@ int main()
 	
 	cout << " Number of spikes during the single-neuron simulation: " << single_neuron.getNum_Spikes_() << endl;
 	
-	
-	
 	return 0;
 }
 
