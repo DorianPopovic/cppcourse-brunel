@@ -1,3 +1,5 @@
+#ifndef NEURON_H
+#define NEURON_H
 #include <vector>
 
 class Neuron{
@@ -51,4 +53,4 @@ class Neuron{
 	
 };
 
-
+#endif /* NEURON_H */
