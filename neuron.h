@@ -35,11 +35,13 @@ class Neuron{
 	unsigned long Last_Spike_time_;   // -> Time when the last spike occured
 	unsigned long Clock_;             // -> Local clock for each neuron
 	
-	//------Constants for the differential equation------
+	
+	//---------CONSTANTS FOR THE EQUATION-----------
 	double C1_;
 	double C2_;
 	
 	
+	//---------CONSTANTS FOR THE NEURON SIMULATION-----------
 	const double R_ =20.0;              // -> Membrane resistance
 	const double Tau_ =20.0;             // -> Membrane constant time
 	const double Vth_ =20.0;            // -> Threshold at wih spike occurs
