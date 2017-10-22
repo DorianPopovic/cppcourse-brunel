@@ -7,8 +7,8 @@ using namespace std;
 
 /** 
  * MAIN SINGLE-NEURON SIMULATION LOOP
- * --> Updates a given neuron during each step time and beginning at t = 0.
- * --> Writes the value of the membrane potential in a file after each step time.
+ * --> Updates a given neuron during each step time, beginning at t = 0.
+ * --> Writes the value of the membrane potential in a file after each time step.
  */
 
 int main()
