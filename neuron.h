@@ -35,6 +35,7 @@ class Neuron{
 	
 	double V_;       // -> Membrane potential
 	double I_ext_;   // -> External specified current
+	double Delay_;   // -> Delay (in ms) for the spike to travel to the receiving neuron 
 	
 	unsigned long Num_Spikes_;        // -> Number of spikes that occured during the simulation
 	unsigned long Last_Spike_time_;   // -> Time when the last spike occured

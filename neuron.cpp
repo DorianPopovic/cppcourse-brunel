@@ -14,6 +14,7 @@ Neuron:: Neuron()
     Num_Spikes_(0),
     Last_Spike_time_(0),
     Clock_(0),
+    Delay_(1.5),
     Buffer_()
     {
 		C1_ = exp(-h_ / Tau_);
