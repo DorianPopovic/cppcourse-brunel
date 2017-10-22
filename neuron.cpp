@@ -74,6 +74,7 @@ void Neuron::setLast_Spike_time_(unsigned long T)
 
 
 
+
 //-----------------------UPDATE METHOD----------------------//
 /** 
  * Updates our neuron in time for how many simulation steps we want.
@@ -124,4 +125,18 @@ bool Neuron::update(unsigned long simsteps)
 	    ++Clock_;
 	}
 	return spike;
+}
+
+
+
+
+
+//---------------------METHOD TO RECEIVE SPIKES----------------//
+/** Updates our neuron when it receives a spike from another neuron
+ *   FIRST WITHOUT THE DELAY --> membrane potential goes up immediately after the spike
+ *   @param J --> by how much does V go up when it receives a spike
+ *            --> J usually equals 0.1, but it can change depending on the conections*/
+void Neuron::spike_receive(double J)
+{
+	V_ += J;
 }

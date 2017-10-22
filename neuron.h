@@ -22,8 +22,11 @@ class Neuron{
 	void setLast_Spike_time_(unsigned long);
 	
  
-    //-----------------UPDATE FUNCTIONS PROTOTYPE------------//
+    //-----------------UPDATE FUNCTION PROTOTYPE------------//
 	bool update(unsigned long);
+	
+	//-------------FUNCTION FOR RECEIVING SPIKES PROTOTYPE------------//
+	void spike_receive(double);
 	
 	
 	//--------------------------------PRIVATE ARGUMENTS---------------------------------//

@@ -22,7 +22,7 @@ int main()
 	int current_start = 1000;
 	int current_end = 4000;
 	double I_ext = 1.01;
-	Neuron single_neuron;
+	Neuron single_neuron; 
 	
 	
 	ofstream MembPotFile;  		
