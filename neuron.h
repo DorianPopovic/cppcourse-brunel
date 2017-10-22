@@ -39,7 +39,7 @@ class Neuron{
 	unsigned long Num_Spikes_;        // -> Number of spikes that occured during the simulation
 	unsigned long Last_Spike_time_;   // -> Time when the last spike occured
 	unsigned long Clock_;             // -> Local clock for each neuron
-	//std::vector<unsigned long> Buffer_; NOT USED YET
+	std::vector<double> Buffer_;      // -> Stores the spikes to be received according to the delay (=1.5ms)
 	
 	
 	//---------CONSTANTS FOR THE EQUATION-----------

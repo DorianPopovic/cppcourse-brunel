@@ -13,8 +13,8 @@ Neuron:: Neuron()
     I_ext_(0.0),
     Num_Spikes_(0),
     Last_Spike_time_(0),
-    Clock_(0)
-    //Buffer_() NOT USED YET
+    Clock_(0),
+    Buffer_()
     {
 		C1_ = exp(-h_ / Tau_);
 		C2_ = R_*(1.0 - C1_);
