@@ -22,7 +22,7 @@ int main()
 	int current_start = 1000;
 	int current_end = 4000;
 	double I_ext = 1.01;
-	Neuron single_neuron; 
+	Neuron single_neuron;
 	
 	
 	ofstream MembPotFile;  		
@@ -47,18 +47,18 @@ int main()
 		
 		/** 
 		 * Updating the neuron for a single time-step :
-		 * --> store the membrane potential in a file.
+		 * --> store the membrane potential in a file, for the connected neuron.
 		 * --> if the neuron spikes during this single time-step, write it in the terminal. */
-		bool Spike = single_neuron.update(1);
+		bool single_Spike = single_neuron.update(1);
 		MembPotFile << "At time t= " << simtime*0.1 << "ms    V= " << single_neuron.getV_() << endl;
 		
-		if (Spike)
+		if (single_Spike)
 		{
-			cout << " SPIKE AT t= " << simtime*0.1 << "ms" << endl;
+			cout << " SPIKE FROM THE SINGLE NEURON AT t= " << simtime*0.1 << "ms" << endl;
 		}
 	}
 	
-	cout << " Number of spikes during the single-neuron simulation: " << single_neuron.getNum_Spikes_() << endl;
+	cout << " Number of spikes for the single_neuron : " << single_neuron.getNum_Spikes_() << endl;
 	
 	return 0;
 }
