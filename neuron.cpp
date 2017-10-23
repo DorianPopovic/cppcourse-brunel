@@ -19,6 +19,8 @@ Neuron:: Neuron()
     {
 		C1_ = exp(-h_ / Tau_);
 		C2_ = R_*(1.0 - C1_);
+		DelaySteps_ = static_cast<unsigned long>(ceil(Delay_/h_)); //Computes the smallest integer value not less than Delay_/h_
+		Buffer_.resize(DelaySteps_ + 1, 0.0);
 	}
 
 
@@ -93,6 +95,7 @@ bool Neuron::update(unsigned long simsteps)
 	
 	while (Clock_ < stoptime_)
 	{
+		const auto IN = Clock_ % (DelaySteps_ + 1);
 		if ( Vth_ < V_ ) 
 		{
 			/**
@@ -120,9 +123,10 @@ bool Neuron::update(unsigned long simsteps)
 			 * --> Solve the membrane potential differential equation using the constants (see constructor).
 			 * --> I_ext_ will be checked and set in the main loop.
 			 */
-			 V_ = C1_*V_ + I_ext_*C2_;
+			 V_ = C1_*V_ + I_ext_*C2_ + Buffer_[IN];
 		}
 		
+	    Buffer_[IN] = 0.0;
 	    ++Clock_;
 	}
 	return spike;
@@ -135,9 +139,15 @@ bool Neuron::update(unsigned long simsteps)
 //---------------------METHOD TO RECEIVE SPIKES----------------//
 /** Updates our neuron when it receives a spike from another neuron
  *   FIRST WITHOUT THE DELAY --> membrane potential goes up immediately after the spike
- *   @param J --> by how much does V go up when it receives a spike
- *            --> J usually equals 0.1, but it can change depending on the conections*/
-void Neuron::spike_receive(double J)
+ *   SECOND WITH DELAY       --> delay for the time it takes the spike to travel has to be taken into account
+ *   FIRST : @param J --> by how much does V go up when it receives a spike
+ *                    --> J usually equals 0.1, but it can change depending on the conections
+ *   
+ *   SECOND: @param t --> time when the spike should be received
+ *                    --> internal clock of the neuron sending the spike + delay for the travel
+ */
+void Neuron::spike_receive(unsigned long t, double J)
 {
-	V_ += J;
+	const size_t OUT = t % (DelaySteps_ + 1);
+	Buffer_[OUT] += j;
 }

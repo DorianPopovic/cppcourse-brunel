@@ -26,7 +26,7 @@ class Neuron{
 	bool update(unsigned long);
 	
 	//-------------FUNCTION FOR RECEIVING SPIKES PROTOTYPE------------//
-	void spike_receive(double);
+	void spike_receive(unsigned long, double);
 	
 	
 	//--------------------------------PRIVATE ARGUMENTS---------------------------------//
@@ -40,6 +40,7 @@ class Neuron{
 	unsigned long Num_Spikes_;        // -> Number of spikes that occured during the simulation
 	unsigned long Last_Spike_time_;   // -> Time when the last spike occured
 	unsigned long Clock_;             // -> Local clock for each neuron
+	unsigned long DelaySteps_;        // -> Synaptic delay converted in steps for the simulation           
 	std::vector<double> Buffer_;      // -> Stores the spikes to be received according to the delay (=1.5ms)
 	
 	
