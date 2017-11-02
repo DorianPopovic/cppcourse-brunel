@@ -1,5 +1,7 @@
 #include "neuron.h"
 #include <cmath>
+#include <random>
+
 
 using namespace std;
 
@@ -123,6 +125,62 @@ bool Neuron::update(unsigned long simsteps)
 			 * --> Solve the membrane potential differential equation using the constants (see constructor).
 			 * --> I_ext_ will be checked and set in the main loop.
 			 */
+				static random_device rd;
+				static mt19937 gen(rd());
+				static poisson_distribution<> Ext_Rate_(2);
+			 
+			 V_ = C1_*V_ + I_ext_*C2_ + Buffer_[IN] + Ext_J_*Ext_Rate_(gen);
+		}
+		
+	    Buffer_[IN] = 0.0;
+	    ++Clock_;
+	}
+	return spike;
+}
+
+
+
+
+bool Neuron::update_test(unsigned long simsteps)
+{
+	if (simsteps == 0) return false;
+	
+	bool spike = false;
+	const auto stoptime_ = Clock_ + simsteps;
+	
+	
+	while (Clock_ < stoptime_)
+	{
+		const auto IN = Clock_ % (DelaySteps_ + 1);
+		if ( Vth_ < V_ ) 
+		{
+			/**
+			 * Spike occurs :
+			 * --> increment the number of spikes.
+			 * --> time of the last spike is the internal clock time.
+			 */
+			spike = true;
+			++Num_Spikes_;
+			Last_Spike_time_ = Clock_;
+			
+		}
+		if ((Last_Spike_time_ > 0 ) and ((Clock_ - Last_Spike_time_) < RefSteps_)) 
+		{
+			/** 
+			 * REFRACTORY PERIOD :
+			 * --> set the membrane potential to 0 or 10.
+			 */
+			 V_ = 0.0;
+		}
+		else
+		{
+			/**
+			 * No spike and not refractory :
+			 * --> Solve the membrane potential differential equation using the constants (see constructor).
+			 * --> I_ext_ will be checked and set in the main loop.
+			 */
+			 
+			
 			 V_ = C1_*V_ + I_ext_*C2_ + Buffer_[IN];
 		}
 		

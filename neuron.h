@@ -24,6 +24,7 @@ class Neuron{
  
     //-----------------UPDATE FUNCTION PROTOTYPE------------//
 	bool update(unsigned long);
+	bool update_test(unsigned long);
 	
 	//-------------FUNCTION FOR RECEIVING SPIKES PROTOTYPE------------//
 	void spike_receive(unsigned long, double);
@@ -56,6 +57,7 @@ class Neuron{
 	const double RefTime_ =2.0;         // -> Refractory period duration
 	const double h_ =0.1;               // -> Simulation time step
 	const unsigned long RefSteps_;      // -> How many time steps for the refractory period
+	const double Ext_J_ =0.1;          // -> Weight of the external random connections
 	
 };
 
