@@ -10,7 +10,7 @@ class Neuron{
 	
 	/*********************************************************************************//**
 	 * 
-	 * 						PUBLIC ARGUMENTS FOR THE NEURON CLASS
+	 * 			PUBLIC ARGUMENTS FOR THE NEURON CLASS
 	 * 
 	 ************************************************************************************/
 	
@@ -22,7 +22,7 @@ class Neuron{
 	Neuron ();
 	
 	/*********************************************************************************//**
-	 * 										GETTERS
+	 * 					GETTERS
 	 ************************************************************************************/
 	
 	/**
@@ -59,7 +59,7 @@ class Neuron{
 	
 	
 	/*********************************************************************************//**
-	 * 										SETTERS
+	 * 				 	SETTERS
 	 ************************************************************************************/
 	
 	
@@ -82,8 +82,8 @@ class Neuron{
 	void setLast_Spike_time_(unsigned long T);
 	
  
-    /*********************************************************************************//**
-	 * 				  FUNCTIONS PROTOTYPES FOR THE NEURON SIMULATION
+    	/*********************************************************************************//**
+	 * 		  FUNCTIONS PROTOTYPES FOR THE NEURON SIMULATION
 	 ************************************************************************************/
 	
 	/**
@@ -100,7 +100,7 @@ class Neuron{
 	bool update_test(unsigned long simsteps);
 	
 	/**
-	 * 	Deals with the received spikes from other neurons
+	 * Deals with the received spikes from other neurons
 	 * @param t time of arrival of the received spike
 	 * @param J weight of the received spike
 	 */
@@ -111,7 +111,7 @@ class Neuron{
 	
 	/*********************************************************************************//**
 	 * 
-	 * 						PRIVATE ARGUMENTS FOR THE NEURON CLASS
+	 * 			PRIVATE ARGUMENTS FOR THE NEURON CLASS
 	 * 
 	 ************************************************************************************/
 	
@@ -129,15 +129,15 @@ class Neuron{
 	
 	
 	/**********************************************//** 
-	 * 		 DIFFERENTIAL EQUATION CONSTANTS
+	 * 	 DIFFERENTIAL EQUATION CONSTANTS
 	 *************************************************/
 	
-	double C1_;  //!< Decaying part of the solution
+	double C1_;  	 //!< Decaying part of the solution
 	double C2_;	 //!< External current input part of the solution
 	
 	
 	/**********************************************//** 
-	 * 		    NEURON SIMULATION CONSTANTS
+	 * 	   NEURON SIMULATION CONSTANTS
 	 *************************************************/
 	
 	const double R_ =20.0;              //!< Membrane resistance (Ohm)
