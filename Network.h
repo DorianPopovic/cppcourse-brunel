@@ -6,42 +6,71 @@
 using namespace std;
 
 
-
+/**
+* Network Class
+*/
 class Network{
 	
-	//-------------------PUBLIC ARGUMENTS AND METHODS PROTOTYPES--------------//
+	/*********************************************************************************//**
+	 * 
+	 * 						PUBLIC ARGUMENTS FOR THE NETWORK CLASS
+	 * 
+	 ************************************************************************************/
 	
 	public:
+	
+	/**
+	 * Network constructor
+	 */
 	Network();
 	
+	
+	/*********************************************************************************//**
+	 * 				  FUNCTIONS PROTOTYPES FOR THE NETWORK SIMULATION
+	 ************************************************************************************/
+	
+	/**
+	 * Randomly connects all the neurons to create the network
+	 */
 	void Connect_Network();
 	
-	void Simulate_Network(int, int);
+	/**
+	 * Simulates the time updating of the neuronal network
+	 * @param simtime time when the simulation starts
+	 * @param t_stop time when the simulation stops
+	 */
+	void Simulate_Network(int simtime, int t_stop);
 	
 	
-	//--------------------------------PRIVATE ARGUMENTS---------------------------------//
+	
+	
+	/*********************************************************************************//**
+	 * 
+	 * 						PRIVATE ARGUMENTS FOR THE NETWORK CLASS
+	 * 
+	 ************************************************************************************/
 	
 	private:
 	
-	//-----------------ARGUMENTS FOR THE NEURON NETWORK-----------------//
-	
-	vector<Neuron> All_Neurons_;
-	
-	vector< vector<int> > Connections_;
 	
 	
+	vector<Neuron> All_Neurons_;			//!< Vector containing all the neurons for the simulation			
+	vector< vector<int> > Connections_;		//!< Vector containing the vectors with the connected neurons for each neuron
 	
-	//---------CONSTANTS FOR THE NETWORK SIMULATION-----------//
 	
-	int TotalNeurons_;
-	int Num_Ex_;
-	int Num_In_;
-	int Num_Ci_;
-	int Num_Ce_;
-	double J_Ex_;
-	double J_In_;
-	int DELAY_;
+	/**********************************************//** 
+	 * 		    NETWORK SIMULATION CONSTANTS
+	 *************************************************/
 	
+	int TotalNeurons_;		//!< Total number of neurons for the simulation
+	int Num_Ex_;			//!< Number of Excitatory neurons
+	int Num_In_;			//!< Number of Inhibitory neurons
+	int Num_Ci_;			//!< Number of connexions received from inhibitory neurons
+	int Num_Ce_;			//!< Number of connexions received from excitatory neurons
+	double J_Ex_;			//!< Weight of the spike sent by excitatory neurons
+	double J_In_;			//!< Weight of the spike sent by inhibitory neurons
+	int DELAY_;				//!< Delay for the spike reception (needed for the buffer)
+					
 	
 };  
 
