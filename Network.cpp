@@ -18,11 +18,19 @@ Network:: Network()
 	J_In_(-0.5),
 	DELAY_(15)
 	{
+		/*** 
+		 * from 0 to 9999 the will be excitatory
+		 * from 9999 to 12499 the will be inhibitory
+		 ***/
 		for (size_t i=0; i<TotalNeurons_; i++)
 		{
 			All_Neurons_.push_back(Neuron());
 		}
 		
+		/***
+		 * Each neurons gets an empty vector of
+		 * neurons it has to send the spike to
+		 ***/
 		for (size_t j=0; j<TotalNeurons_; ++j)
 		{
 			vector<int> empty;
@@ -35,28 +43,33 @@ Network:: Network()
 
 void Network::Connect_Network()
 {
-	//cout << "je suis dans simulate" << endl;
 	
 	for (size_t neuron_i=0;  neuron_i < TotalNeurons_; neuron_i++)
 	{
+		/***
+		 * iterating for every neuron as following :
+		 * --> for each neuron we will choose a random number 
+		 * --> two times (first 1000 times for excitatory then 250 times for inhibitory)
+		 * --> the random number chosen means that this neuron will have to send its 
+		 *     spikes to the neuron we are iterating on
+		 * --> so we push back the index of the neuron we are iterating on
+		 *     to the randomly chosen number
+		 * ***/                  
+		
+		
+		//------------------------Excitatory loop--------------------//
 		for (size_t i=0; i<Num_Ce_; ++i)
 		{
-			//random ( 0 à Num_Ex )
-			//[random].pushback(neuron_i)
-			
 			static random_device rd;
 			static mt19937 gen(rd());
 			static uniform_int_distribution<> connected_neuron(0, Num_Ex_ -1);
-			//cout << " avant connections" << endl;
+			
 			Connections_[connected_neuron(gen)].push_back(neuron_i);
-			//cout << " apres connections" << endl;
 		}
+		
+		//------------------------Inhibitory loop--------------------//
 		for (size_t j=10000; j<(10000 + Num_Ci_); ++j)
 		{
-			//cout << "2eme boucle for" << endl;
-			//random (10000 à 10000+Num_Im)
-			//[random].pushback(neuron.1)
-			
 			static random_device rd;
 			static mt19937 gen(rd());
 			static uniform_int_distribution<> connected_neuron(Num_Ex_, (TotalNeurons_ -1));
@@ -81,14 +94,27 @@ void Network::Simulate_Network(int simtime, int t_stop)
 		
 		if(simtime > progress_rate)
 		{
-			cout << progress << "%" << endl;
-			++progress;
-			progress_rate += 0.01*t_stop;
+			/***
+			 * --> This is for showing the progression rate in percentage
+			 ***/
+			 
+			 cout << progress << "%" << endl;
+			 ++progress;
+			 progress_rate += 0.01*t_stop;
 		}
+		
+		
 		
 		for (size_t i=0; i < All_Neurons_.size(); ++i)
 		{
-			//cout << "updating neuron" << i<< endl;
+			
+			/***
+			 * we update each neuron over one step time and if it spikes
+			 * it has to send the weight (depending on if Ex or In)
+			 * to all the neuron that it is connected to and we store in the file
+			 ***/
+			
+			
 			if (All_Neurons_[i].update(1))
 			{
 				Spikesfile << simtime << "\t" << i << "\n";
@@ -96,6 +122,7 @@ void Network::Simulate_Network(int simtime, int t_stop)
 				for (size_t j=0; j<Connections_[i].size(); ++j)
 				{
 					int receiver (Connections_[i][j]);
+					
 					if (i < Num_Ex_ )
 					{
 						All_Neurons_[receiver].spike_receive(simtime+DELAY_, J_Ex_);
@@ -107,7 +134,8 @@ void Network::Simulate_Network(int simtime, int t_stop)
 				}
 			}
 		}
-		++ simtime;
+		
+	++ simtime;
 	}
 	
 }
