@@ -13,7 +13,7 @@ class Network{
 	
 	/*********************************************************************************//**
 	 * 
-	 * 						PUBLIC ARGUMENTS FOR THE NETWORK CLASS
+	 * 			PUBLIC ARGUMENTS FOR THE NETWORK CLASS
 	 * 
 	 ************************************************************************************/
 	
@@ -26,7 +26,7 @@ class Network{
 	
 	
 	/*********************************************************************************//**
-	 * 				  FUNCTIONS PROTOTYPES FOR THE NETWORK SIMULATION
+	 * 		   FUNCTIONS PROTOTYPES FOR THE NETWORK SIMULATION
 	 ************************************************************************************/
 	
 	/**
@@ -46,7 +46,7 @@ class Network{
 	
 	/*********************************************************************************//**
 	 * 
-	 * 						PRIVATE ARGUMENTS FOR THE NETWORK CLASS
+	 * 			PRIVATE ARGUMENTS FOR THE NETWORK CLASS
 	 * 
 	 ************************************************************************************/
 	
@@ -59,7 +59,7 @@ class Network{
 	
 	
 	/**********************************************//** 
-	 * 		    NETWORK SIMULATION CONSTANTS
+	 * 	   NETWORK SIMULATION CONSTANTS
 	 *************************************************/
 	
 	int TotalNeurons_;		//!< Total number of neurons for the simulation
@@ -69,7 +69,7 @@ class Network{
 	int Num_Ce_;			//!< Number of connexions received from excitatory neurons
 	double J_Ex_;			//!< Weight of the spike sent by excitatory neurons
 	double J_In_;			//!< Weight of the spike sent by inhibitory neurons
-	int DELAY_;				//!< Delay for the spike reception (needed for the buffer)
+	int DELAY_;			//!< Delay for the spike reception (needed for the buffer)
 					
 	
 };  
