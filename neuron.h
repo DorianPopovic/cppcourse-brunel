@@ -107,16 +107,30 @@ class Neuron{
 	void spike_receive(unsigned long t, double J);
 	
 	/**
-	 * @brief Updates one neuron for the time we want.
+	 * @brief Simulates the neuron fo the entire timme.
 	 * Stores the membrane potential in a file after eache time step.
 	 * Prints the times when the spikes occured during the simulation.
 	 * Prints the number of spikes that occured during the simulation.
-	 * @param endtime : time when the simulationd ends
+	 * @param endtime : time when the simulationd ends (starting from zero)
 	 * @param current_start : time when the current input begins
 	 * @param current_end : time when the current input ends
 	 * @param I_ext : weight of the external current input
 	 */
 	 void simulate_one_neuron(int endtime, int current_start, int current_end, double I_ext);
+	 
+	 /**
+	 * @brief Simulates the connection between two neurons.
+	 * One Neuron receives external input and sends spike, 
+	 * the other receives only the spike using the buffer.
+	 * Stores the mambrane potential of the neuron receiving the spike.
+	 * @param connected_neuron : neuron that receives the spike
+	 * @param endtime : time whn the simulation stops (starting from zero)
+	 * @param current_start : time when the current input begins
+	 * @param current_end : time when the current input ends
+	 * @param I_ext : weight of the external current input
+	 * @param Delay : delay for the spike to travel to the connected neuron
+	 */
+	 void simulate_two_neurons(Neuron connected_neuron, int endtime, int current_start, int current_end, double I_ext, int Delay);
 	
 	
 	
