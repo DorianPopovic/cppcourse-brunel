@@ -229,13 +229,13 @@ void Neuron::spike_receive(unsigned long t, double J)
 
 
 /******************************************************************************************************** 
- * 	    						METHOD THAT UPDATES THE NEURON
+ * 	    						METHOD THAT SIMULATES THE NEURON
 *********************************************************************************************************/
 void Neuron::simulate_one_neuron(int endtime, int current_start, int current_end, double I_ext)
 {
 	
 	ofstream MembPotFile;  		
-    MembPotFile.open ("./MembPotFile");
+    MembPotFile.open ("./SingleNeuronMembPotFile");
     MembPotFile << "Starting Simulation.\n";
 	
 	
@@ -262,3 +262,48 @@ void Neuron::simulate_one_neuron(int endtime, int current_start, int current_end
 	MembPotFile.close();
 	cout << " Number of spikes for the single_neuron : " << getNum_Spikes_() << endl;
 }
+
+
+
+
+/*********************************************************************************************************************************** 
+ * 	    						   METHOD THAT SIMULATES TCONNECTION BETWEEN TWO NEURONS WITH BUFFER
+************************************************************************************************************************************/
+void Neuron::simulate_two_neurons(Neuron connected_neuron, int endtime, int current_start, int current_end, double I_ext, int Delay)
+{	
+	ofstream MembPotFile;  		
+    MembPotFile.open ("./TwoNeuronsMembPotFile");
+    MembPotFile << "Starting Simulation.\n";
+	
+	
+	for( int simtime=0; simtime < endtime; ++simtime )
+	{
+		if( (current_start <= simtime) and (simtime < current_end) )
+		{
+			 setI_ext_(I_ext);
+		}
+		else
+		{
+			setI_ext_(0.0);
+		}
+		bool single_Spike = update_test(1);
+		bool connected_Spike = connected_neuron.update_test(1);
+		
+		MembPotFile << "At time t= " << simtime*0.1 << "ms    V= " << connected_neuron.getV_() << endl;
+		
+		if (single_Spike)
+		{
+			 cout << " SPIKE FROM THE SINGLE NEURON AT t= " << simtime*0.1 << "ms" << endl;
+			 connected_neuron.spike_receive(simtime+Delay, 0.1);
+		}
+		if (connected_Spike)
+		{
+			cout << " SPIKE FROM THE CONNECTED NEURON AT t= " << simtime*0.1 << "ms" << endl;
+		}
+	}
+	
+	cout << " Number of spikes for the single neuron : " << getNum_Spikes_() << endl;
+	cout << " Number of spikes for the connected neuron : " << connected_neuron.getNum_Spikes_() << endl;
+}
+
+
