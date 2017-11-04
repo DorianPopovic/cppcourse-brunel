@@ -8,7 +8,7 @@
 */
 class Neuron{
 	
-	/*********************************************************************************//**
+	/*************************************************************************************
 	 * 
 	 * 			PUBLIC ARGUMENTS FOR THE NEURON CLASS
 	 * 
@@ -17,40 +17,40 @@ class Neuron{
 	public:
 	
 	/**
-	 * Neuron constructor
+	 * @brief Neuronal constructor
 	 */
 	Neuron ();
 	
-	/*********************************************************************************//**
+	/*************************************************************************************
 	 * 					GETTERS
 	 ************************************************************************************/
 	
 	/**
-	 * Gives access to the membrane potential value
+	 * @brief Gets membrane potential
 	 * @return Membrane potential value
 	 */
 	double getV_() const;
 	
 	/**
-	 * Gives access to the external current value
+	 * @brief Gives access to the external current value
 	 * @return specified external current for the neuron
 	 */
 	double getI_ext_() const;
 	
 	/**
-	 * Gives acces to the number of spikes of the neuron
+	 * @brief Gives acces to the number of spikes of the neuron
 	 * @return total number of spikes
 	 */
 	unsigned long getNum_Spikes_() const;
 	
 	/**
-	 * Gives access to the time of the last occured spike
+	 * @brief Gives access to the time of the last occured spike
 	 * @return last occuring spike time
 	 */
 	unsigned long getLast_Spike_time_() const;
 	
 	/**
-	 * Gives access to the internal neuron time
+	 * @brief Gives access to the internal neuron time
 	 * @return internal clock neuron time
 	 */
 	unsigned long getClock_() const;
@@ -58,58 +58,70 @@ class Neuron{
 	
 	
 	
-	/*********************************************************************************//**
+	/*************************************************************************************
 	 * 				 	SETTERS
 	 ************************************************************************************/
 	
 	
 	/**
-	 * Sets the potential membrane value
-	 * @param v wanted value of the membrane potential
+	 * @brief Sets the potential membrane value
+	 * @param v : wanted value of the membrane potential
 	 */
 	void setV_(double v);
 	
 	/**
-	 * Sets the external curent value
-	 * @param i wanted value of the ternal current
+	 * @brief Sets the external curent value
+	 * @param i : wanted value of the ternal current
 	 */
 	void setI_ext_(double i);
 	
 	/**
-	 * Sets the time of the last occuring spike
-	 * @param T time of the last occuring spike
+	 * @brief Sets the time of the last occuring spike
+	 * @param T : time of the last occuring spike
 	 */
 	void setLast_Spike_time_(unsigned long T);
 	
  
-    	/*********************************************************************************//**
+    	/*********************************************************************************
 	 * 		  FUNCTIONS PROTOTYPES FOR THE NEURON SIMULATION
 	 ************************************************************************************/
 	
 	/**
-	 * Updates the neuron over time
-	 * @param simsteps number of simulation steps to update the neuron for
+	 * @brief Updates the neuron over time
+	 * @param simsteps : number of simulation steps to update the neuron for
 	 * @return true if there was a spike durin the time-step, false otherwise
 	 */
 	bool update(unsigned long simsteps);
 	
 	/**
-	 * Update method used for google tests (similar to update, but without poisson)
-	 * @param simsteps number of simulation steps to update the neuron for 
+	 * @brief Update method used for google tests (similar to update, but without poisson)
+	 * @param simsteps : number of simulation steps to update the neuron for 
 	 */
 	bool update_test(unsigned long simsteps);
 	
 	/**
-	 * Deals with the received spikes from other neurons
-	 * @param t time of arrival of the received spike
-	 * @param J weight of the received spike
+	 * @brief Deals with the received spikes from other neurons
+	 * @param t : time of arrival of the received spike
+	 * @param J : weight of the received spike
 	 */
 	void spike_receive(unsigned long t, double J);
 	
+	/**
+	 * @brief Updates one neuron for the time we want.
+	 * Stores the membrane potential in a file after eache time step.
+	 * Prints the times when the spikes occured during the simulation.
+	 * Prints the number of spikes that occured during the simulation.
+	 * @param endtime : time when the simulationd ends
+	 * @param current_start : time when the current input begins
+	 * @param current_end : time when the current input ends
+	 * @param I_ext : weight of the external current input
+	 */
+	 void simulate_one_neuron(int endtime, int current_start, int current_end, double I_ext);
 	
 	
 	
-	/*********************************************************************************//**
+	
+	/*************************************************************************************
 	 * 
 	 * 			PRIVATE ARGUMENTS FOR THE NEURON CLASS
 	 * 
@@ -128,7 +140,7 @@ class Neuron{
 	std::vector<double> Buffer_;      //!< Storage for the spikes to be received according to the delay (=1.5ms)
 	
 	
-	/**********************************************//** 
+	/************************************************** 
 	 * 	 DIFFERENTIAL EQUATION CONSTANTS
 	 *************************************************/
 	
@@ -136,7 +148,7 @@ class Neuron{
 	double C2_;	 //!< External current input part of the solution
 	
 	
-	/**********************************************//** 
+	/************************************************** 
 	 * 	   NEURON SIMULATION CONSTANTS
 	 *************************************************/
 	
