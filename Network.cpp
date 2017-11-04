@@ -15,7 +15,7 @@ Network:: Network()
 	Num_Ce_(0.1*Num_Ex_),
 	Num_Ci_(0.1*Num_In_),
 	J_Ex_(0.1),
-	J_In_(-0.5),
+	J_In_(-0.45),
 	DELAY_(15)
 	{
 		/*** 
@@ -109,15 +109,27 @@ void Network::Simulate_Network(int simtime, int t_stop)
 		{
 			
 			/***
-			 * we update each neuron over one step time and if it spikes
+			 * We update each neuron over one step time and if it spikes
 			 * it has to send the weight (depending on if Ex or In)
-			 * to all the neuron that it is connected to and we store in the file
+			 * to all the neuron that it is connected to and we store in the file.
+			 * So each neuron is connected to:
+			 * --> 1000 random excitatory neurons
+			 * --> 250 random inhibitory neurons
 			 ***/
 			
 			
 			if (All_Neurons_[i].update(1))
 			{
-				Spikesfile << simtime << "\t" << i << "\n";
+				/******
+				 * Uncomment to get the same time interval as 
+				 * in Brunel's figure 8 (1000ms to 1200ms)
+				 ******/
+				if (10000<simtime and simtime <12000)
+				{
+					Spikesfile << simtime << "\t" << i << "\n";
+				}
+				
+				//Spikesfile << simtime << "\t" << i << "\n";
 				
 				for (size_t j=0; j<Connections_[i].size(); ++j)
 				{
@@ -138,4 +150,5 @@ void Network::Simulate_Network(int simtime, int t_stop)
 	++ simtime;
 	}
 	
+	Spikesfile.close();
 }

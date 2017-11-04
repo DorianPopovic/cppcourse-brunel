@@ -7,7 +7,8 @@ using namespace std;
 int main()
 {
 	/***********************************************
-	 * Change the constants for the simulation here
+	 *   CHANGE THE SIMUALTION CONSTANTS HERE
+	 * 
 	 * -> endtime: when does the simulation end ?
 	 * -> current_start: when does the input begin ?
 	 * -> current_start: when does the input stop ?

@@ -6,19 +6,18 @@ using namespace std;
 
 int main()
 {
-	int t_start =0;
-	int t_stop =10000;
+	/***
+	 * Change the times you want to simulate the network here 
+	 *  --> t_start = start for the simulation
+	 *  --> t_stop = stop for the simulation 
+	 ****/
+	 int t_start =0;
+	 int t_stop =12000;
 	
-
 	
 	Network Final_Network;
-	cout << "autre connerie" << endl;
-	
 	Final_Network.Connect_Network();
-	cout << "conneries" << endl;
-	
 	Final_Network.Simulate_Network(t_start, t_stop);
-	
 	
 	return 0;
 }
