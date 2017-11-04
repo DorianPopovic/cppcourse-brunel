@@ -11,7 +11,7 @@ using namespace std;
 */
 class Network{
 	
-	/*********************************************************************************//**
+	/***********************************************************************************
 	 * 
 	 * 			PUBLIC ARGUMENTS FOR THE NETWORK CLASS
 	 * 
@@ -20,31 +20,31 @@ class Network{
 	public:
 	
 	/**
-	 * Network constructor
+	 * @brief Networkal constructor
 	 */
 	Network();
 	
 	
-	/*********************************************************************************//**
+	/***********************************************************************************
 	 * 		   FUNCTIONS PROTOTYPES FOR THE NETWORK SIMULATION
 	 ************************************************************************************/
 	
 	/**
-	 * Randomly connects all the neurons to create the network
+	 * @brief Randomly connects all the neurons to create the network
 	 */
 	void Connect_Network();
 	
 	/**
-	 * Simulates the time updating of the neuronal network
-	 * @param simtime time when the simulation starts
-	 * @param t_stop time when the simulation stops
+	 * @brief Simulates the time updating of our neuronal network
+	 * @param simtime : time when the simulation starts
+	 * @param t_stop : time when the simulation stops
 	 */
 	void Simulate_Network(int simtime, int t_stop);
 	
 	
 	
 	
-	/*********************************************************************************//**
+	/***********************************************************************************
 	 * 
 	 * 			PRIVATE ARGUMENTS FOR THE NETWORK CLASS
 	 * 
@@ -58,7 +58,7 @@ class Network{
 	vector< vector<int> > Connections_;		//!< Vector containing the vectors with the connected neurons for each neuron
 	
 	
-	/**********************************************//** 
+	/************************************************ 
 	 * 	   NETWORK SIMULATION CONSTANTS
 	 *************************************************/
 	
