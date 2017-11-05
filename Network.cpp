@@ -124,12 +124,12 @@ void Network::Simulate_Network(int simtime, int t_stop)
 				 * Uncomment to get the same time interval as 
 				 * in Brunel's figure 8 (1000ms to 1200ms)
 				 ******/
-				if (10000<simtime and simtime <12000)
+				/*if (10000<simtime and simtime <12000)
 				{
 					Spikesfile << simtime << "\t" << i << "\n";
-				}
+				}*/
 				
-				//Spikesfile << simtime << "\t" << i << "\n";
+				Spikesfile << simtime << "\t" << i << "\n";
 				
 				for (size_t j=0; j<Connections_[i].size(); ++j)
 				{
