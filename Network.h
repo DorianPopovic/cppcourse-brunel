@@ -24,6 +24,16 @@ class Network{
 	 */
 	Network();
 	
+	/*************************************************************************************
+	 * 				 	SETTERS
+	 ************************************************************************************/
+	 /**
+	 * @brief Sets the weight of the inhibitory connections
+	 * @param J_In : wanted weight for the inhibitory connections
+	 */
+	 void setJ_In_(double J_In);
+	
+	
 	
 	/***********************************************************************************
 	 * 		   FUNCTIONS PROTOTYPES FOR THE NETWORK SIMULATION

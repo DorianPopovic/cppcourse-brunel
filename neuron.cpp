@@ -3,6 +3,7 @@
 #include <random>
 #include <fstream>
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 
@@ -38,6 +39,7 @@ Neuron:: Neuron()
 		 * Make sur that the buffer has the right size
 		 ***/
 		 Buffer_.resize(DelaySteps_ + 1, 0.0);
+		 assert(Buffer_.size()==DelaySteps_+1);
 	}
 
 
@@ -147,6 +149,15 @@ bool Neuron::update(unsigned long simsteps)
 			   static random_device rd;
 			   static mt19937 gen(rd());
 			   static poisson_distribution<> Ext_Rate_(2);
+			   /***
+			    * DEPENDING ON WHAT FINAL BRUNELS FIGURE YOU WANT TO REPRODUCE 
+			    * CHANGE THE VALUE UP HERE IN Ext_Rate_(xxxx) to:
+			    * figure A) 2
+			    * figure B) 4
+			    * figure C) 2
+			    * figure D) 0.9
+			    * (2 by default)
+			    ***/
 			   
 			  /***
 			   * We solve equation for the membrane potential
@@ -222,6 +233,7 @@ void Neuron::spike_receive(unsigned long t, double J)
 	 * the update method we take it out
 	 ***/
 	const size_t OUT = t % (DelaySteps_ + 1);
+	assert(OUT < Buffer_.size());
 	Buffer_[OUT] += J;
 }
 
@@ -229,7 +241,7 @@ void Neuron::spike_receive(unsigned long t, double J)
 
 
 /******************************************************************************************************** 
- * 	    						METHOD THAT SIMULATES THE NEURON
+ * 	    				METHOD THAT SIMULATES THE NEURON
 *********************************************************************************************************/
 void Neuron::simulate_one_neuron(int endtime, int current_start, int current_end, double I_ext)
 {
@@ -267,7 +279,7 @@ void Neuron::simulate_one_neuron(int endtime, int current_start, int current_end
 
 
 /*********************************************************************************************************************************** 
- * 	    						   METHOD THAT SIMULATES TCONNECTION BETWEEN TWO NEURONS WITH BUFFER
+ * 	    			  METHOD THAT SIMULATES TCONNECTION BETWEEN TWO NEURONS WITH BUFFER
 ************************************************************************************************************************************/
 void Neuron::simulate_two_neurons(Neuron connected_neuron, int endtime, int current_start, int current_end, double I_ext, int Delay)
 {	

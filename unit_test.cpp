@@ -69,7 +69,7 @@ TEST (Neurontest, Spikes)
 
 
 /***
- * Zhis test checks if enough spikes occured 
+ * This test checks if enough spikes occured 
  * according to our external current value.
  ***/
 TEST (Neurontest, SpikeNumber)
@@ -86,7 +86,7 @@ TEST (Neurontest, SpikeNumber)
 /***
  * This test checks the connection between tow neurons.
  * One has external input so that it spikes, the other
- * ha none and waits to receive the spike.
+ * has none and waits to receive the spike.
  ***/
 TEST (NeuronConnection, WithoutSpike)
 {
@@ -116,7 +116,7 @@ TEST (NeuronConnection, WithoutSpike)
 /***
  * Here we check if the second neuron also 
  * spikes after enough time steps, after
- * ecieving the spike from the first neuron.
+ * receiving the spike from the first neuron.
  ***/
 TEST (NeuronConnection, WithSpike)
 {

@@ -2,6 +2,7 @@
 #include <random>
 #include <fstream>
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ Network:: Network()
 		{
 			All_Neurons_.push_back(Neuron());
 		}
-		
+		assert(All_Neurons_.size()==TotalNeurons_);
 		/***
 		 * Each neurons gets an empty vector of
 		 * neurons it has to send the spike to
@@ -35,6 +36,7 @@ Network:: Network()
 		{
 			vector<int> empty;
 			Connections_.push_back(empty);
+			assert(Connections_[j].empty());
 		}
 	}
 
@@ -121,16 +123,23 @@ void Network::Simulate_Network(int simtime, int t_stop)
 			if (All_Neurons_[i].update(1))
 			{
 				/******
-				 * Uncomment to get the same time interval as 
-				 * in Brunel's figure 8 (1000ms to 1200ms)
+				 * Uncomment as following to get the same time interval as 
+				 * in Brunel's figure 8 (1000ms to 1200ms) depending 
+				 * on what plot you want to reproduce:
+				 * ==> First "if loop" for figure A)
+				 * ==> Second "if loop" for figure B), C) and D)
 				 ******/
+				/*if (5000<simtime and simtime <6000)
+				{
+					Spikesfile << simtime << "\t" << i << "\n";
+				}*/
+				
 				/*if (10000<simtime and simtime <12000)
 				{
 					Spikesfile << simtime << "\t" << i << "\n";
 				}*/
 				
-				Spikesfile << simtime << "\t" << i << "\n";
-				
+			
 				for (size_t j=0; j<Connections_[i].size(); ++j)
 				{
 					int receiver (Connections_[i][j]);
@@ -151,4 +160,14 @@ void Network::Simulate_Network(int simtime, int t_stop)
 	}
 	
 	Spikesfile.close();
+}
+
+
+
+/*****************************************
+* 				 	SETTERS
+*****************************************/
+void Network::setJ_In_(double J_In)
+{
+	J_In_=J_In;
 }
