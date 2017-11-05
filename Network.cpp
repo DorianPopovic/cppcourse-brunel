@@ -15,7 +15,7 @@ Network:: Network()
 	Num_Ce_(0.1*Num_Ex_),
 	Num_Ci_(0.1*Num_In_),
 	J_Ex_(0.1),
-	J_In_(-0.45),
+	J_In_(-0.5),
 	DELAY_(15)
 	{
 		/*** 

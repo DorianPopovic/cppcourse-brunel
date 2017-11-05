@@ -12,7 +12,7 @@ int main()
 	 *  --> t_stop = stop for the simulation 
 	 ****/
 	 int t_start =0;
-	 int t_stop =12000;
+	 int t_stop =1000;
 	
 	
 	Network Final_Network;

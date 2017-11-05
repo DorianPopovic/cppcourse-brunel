@@ -146,7 +146,7 @@ bool Neuron::update(unsigned long simsteps)
 			   ***/
 			   static random_device rd;
 			   static mt19937 gen(rd());
-			   static poisson_distribution<> Ext_Rate_(0.9);
+			   static poisson_distribution<> Ext_Rate_(2);
 			   
 			  /***
 			   * We solve equation for the membrane potential
