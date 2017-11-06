@@ -84,6 +84,14 @@ void Network::Connect_Network()
 
 void Network::Simulate_Network(int simtime, int t_stop)
 {
+	/***
+	 * Checking if the 
+	 * inputs are correct
+	 ***/
+	assert(simtime >= 0);
+	assert(t_stop > 0);
+	assert(t_stop > simtime);
+	
 	ofstream Spikesfile;  		
     Spikesfile.open ("./spikes.gdf");
     
@@ -138,6 +146,11 @@ void Network::Simulate_Network(int simtime, int t_stop)
 				{
 					Spikesfile << simtime << "\t" << i << "\n";
 				}*/
+				
+				/***
+				 * UNCOMMENT ME IF YOU CHOSE THE FASTER SIMULATION
+				 ***/
+				 Spikesfile << simtime << "\t" << i << "\n";
 				
 			
 				for (size_t j=0; j<Connections_[i].size(); ++j)

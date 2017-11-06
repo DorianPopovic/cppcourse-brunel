@@ -18,7 +18,7 @@ int main()
 	 *************************************************************************/
 
 	int endtime = 5000;
-	int current_start = 1000;
+	int current_start = 0;
 	int current_end = 4000;
 	double I_ext = 1.01;
 	int Delay = 15;

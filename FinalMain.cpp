@@ -17,10 +17,15 @@ int main()
 	 * C) t_start =0 & t_stop = 12000
 	 * D) t_start =0 & t_stop = 12000
 	 * 
+	 * If you want fastersimulation use:
+	 * A)t_start =0 & t_stop=1000
+	 * B), C) or D) t_start =0 & t_stop=3000
+	 * 
 	 * ==> GO TO Neuron.cpp update method for further instructions before simulation.
+	 * ==> GO TO Network.cpp simulate_network method for instructions on printing values in the file before simulation.
 	 ****/
 	 int t_start =0;
-	 int t_stop =6000;
+	 int t_stop =3000;
 	
 	
 	Network Final_Network;
