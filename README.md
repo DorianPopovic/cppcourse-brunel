@@ -51,7 +51,7 @@ $ ./unit_test    (executes the tests)
 
 This is how to execute all the files except the final simulation.
 
-							EXECUTE THE FINAL SIMULATION
+						EXECUTE THE FINAL SIMULATION
 
 //! STEPS TO FOLLOW BEFORE TAPING ./Final !\\
 
@@ -96,7 +96,7 @@ After you chose the simulation and uncommented just tap from the build folder:
 $ ./Final (to execute the final simulation)
 
 
-								PLOT THE RESULTS:
+							PLOT THE RESULTS:
 
 The final execution should have generated a new "spike.gdf" file. On jupyter.org upload this file and create a new Python page.
 
