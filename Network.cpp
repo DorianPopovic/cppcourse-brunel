@@ -42,7 +42,9 @@ Network:: Network()
 
 
 
-
+/*************************************************************************************
+* 				 CONNECTION METHOD
+*************************************************************************************/
 void Network::Connect_Network()
 {
 	
@@ -82,6 +84,9 @@ void Network::Connect_Network()
 }
 
 
+/*************************************************************************************
+* 				 SIMULATE METHOD
+*************************************************************************************/
 void Network::Simulate_Network(int simtime, int t_stop)
 {
 	/***
@@ -150,7 +155,7 @@ void Network::Simulate_Network(int simtime, int t_stop)
 				/***
 				 * UNCOMMENT ME IF YOU CHOSE THE FASTER SIMULATION
 				 ***/
-				 Spikesfile << simtime << "\t" << i << "\n";
+				 /*Spikesfile << simtime << "\t" << i << "\n";*/
 				
 			
 				for (size_t j=0; j<Connections_[i].size(); ++j)
@@ -178,7 +183,7 @@ void Network::Simulate_Network(int simtime, int t_stop)
 
 
 /*****************************************
-* 				 	SETTERS
+* 		SETTERS
 *****************************************/
 void Network::setJ_In_(double J_In)
 {

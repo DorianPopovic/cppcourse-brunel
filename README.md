@@ -119,8 +119,7 @@ pl.show();
 And click on the run button.
 
 
-
-
+The pdf file shows my results and compares them with the Brunel figures.
 
 
 

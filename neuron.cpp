@@ -245,6 +245,15 @@ void Neuron::spike_receive(unsigned long t, double J)
 *********************************************************************************************************/
 void Neuron::simulate_one_neuron(int endtime, int current_start, int current_end, double I_ext)
 {
+	/***
+	 * checking the inputs
+	 ***/
+	assert (endtime > 0);
+	assert (current_start >= 0);
+	assert (current_end >= 0);
+	assert (current_start <= current_end);
+	assert (current_end <= endtime);
+	
 	
 	ofstream MembPotFile;  		
     MembPotFile.open ("./SingleNeuronMembPotFile");
@@ -283,6 +292,15 @@ void Neuron::simulate_one_neuron(int endtime, int current_start, int current_end
 ************************************************************************************************************************************/
 void Neuron::simulate_two_neurons(Neuron connected_neuron, int endtime, int current_start, int current_end, double I_ext, int Delay)
 {	
+	/***
+	 * checking the inputs
+	 ***/
+	assert(endtime > 0);
+	assert (current_start >= 0);
+	assert (current_end >= 0);
+	assert (current_start <= current_end);
+	assert (current_end <= endtime);
+	
 	ofstream MembPotFile;  		
     MembPotFile.open ("./TwoNeuronsMembPotFile");
     MembPotFile << "Starting Simulation.\n";
